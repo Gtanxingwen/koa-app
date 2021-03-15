@@ -10,12 +10,15 @@ const app = new Koa()
 
 
 const routeing = require('./routes')
+const database = require('./mongodb')
 
 
 let options = {
   postFormat: (e, { stack, ...rest }) => process.env.NODE_ENV === 'production' ? rest : { stack, ...rest }
 }
 
+// 连接数据库
+database()
 
 // 处理跨域
 app.use(cors())
